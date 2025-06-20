@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Love Me?</title>
+  <style>
+
+    body {
+      background: linear-gradient(to right, #ffdee9, #b5fffc);
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    h1 {
+      font-size: 3em;
+      color: #d6336c;
+    }
+    p {
+      font-size: 1.5em;
+      color: #333;
+    }
+    button {
+      background-color: #ff6f91;
+      color: white;
+      font-size: 1.2em;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="sparkles"></div>
+  <h1>My Dearest Love,</h1>
+  <p>From the first moment we met, you've been the poetry in my silence, the warmth in every sunrise, the light that colors my world.</p>
+  <p>And now, with all my heart and every piece of my soul, I ask you this one question...</p>
+  <div class="heart">💖</div>
+  <h1>Will You Be My Queen ?</h1>
+ <div class="button-wrapper">
+    <button id="yesButton" onclick="window.location.href='yes.html'">Yes 💍</button>
+    <button id="noButton" onmouseover="moveNoButton()" onclick="handleNoClick()">No 😅</button>
+  </div>
+
+ 
+<script>
+    let noClickAttempts = 0;
+    const maxNoAttempts = 5; // Number of times they can try to click "No"
+
+    function moveNoButton() {
+        const noButton = document.getElementById('noButton');
+        if (noButton.textContent === 'Yes 💍') return; // Stop moving if it's already "Yes"
+
+        noButton.classList.add('moving'); // Add class to temporarily disable transitions
+        const buffer = 100; // Keep buttons away from edges
+        const maxX = window.innerWidth - noButton.offsetWidth - buffer;
+        const maxY = window.innerHeight - noButton.offsetHeight - buffer;
+
+        const randomX = Math.random() * maxX + buffer / 2;
+        const randomY = Math.random() * maxY + buffer / 2;
+
+        noButton.style.position = 'absolute';
+        noButton.style.left = randomX + 'px';
+        noButton.style.top = randomY + 'px';
+
+        // Remove the 'moving' class after a short delay to re-enable transitions for hover effects
+        setTimeout(() => {
+            noButton.classList.remove('moving');
+        }, 50); // Small delay
+    }
+
+    function handleNoClick() {
+        noClickAttempts++;
+        if (noClickAttempts >= maxNoAttempts) {
+            const noButton = document.getElementById('noButton');
+            noButton.textContent = 'Yes 💍';
+            noButton.onclick = null;
+            noButton.onmouseover = null;
+            noButton.style.position = 'static'; // Reset position
+            noButton.style.cursor = 'pointer';
+            noButton.style.margin = '10px'; // Re-apply margin for static position
+            // Ensure the 'Yes' button also has the same margin for consistent spacing
+            document.getElementById('yesButton').style.margin = '10px';
+
+            // Re-wrap in an anchor tag or assign new click handler for yes.html
+            noButton.onclick = function() {
+                window.location.href = 'yes.html';
+            };
+            alert("Looks like fate wants you to say YES! 😉");
+        } else {
+            alert(`Are you sure? You've tried to say no ${noClickAttempts} time(s)!`);
+            moveNoButton(); // Move it again if they manage to click it
+        }
+    }
+
+    // Initial positioning adjustments
+    document.addEventListener('DOMContentLoaded', () => {
+        const noButton = document.getElementById('noButton');
+        // Set initial position for no button (relative to its flex container initially)
+        noButton.style.position = 'relative';
+        noButton.style.top = '0';
+        noButton.style.left = '0';
+    });
+</script>
+<audio autoplay loop>
+  <source src="./A Thousand Years - Christina Perri -Official Audio- (online-audio-converter.com).mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+</body>
+</html>

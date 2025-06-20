@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>I Love You in Fireworks</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      background: url('./imahe/pexels-fabianwiktor-994605.jpg') no-repeat center center/cover;
+      font-family: 'Segoe UI', sans-serif;
+      position: relative;
+    }
+
+    /* Balloon Styles */
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 180px;
+      text-align: center;
+      animation: floatBalloon 10s ease-in infinite;
+      z-index: 3;
+    }
+
+    .balloon .text {
+      background: #ff6f91;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50%;
+      font-size: 1.2em;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      margin-bottom: 10px;
+    }
+
+    .string {
+      height: 60px;
+      width: 2px;
+      background: #555;
+      margin: 0 auto;
+    }
+
+    @keyframes floatBalloon {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-130vh) rotate(2deg);
+        opacity: 0;
+      }
+    }
+
+    /* Missile Styles */
+    .missile {
+      position: absolute;
+      bottom: -40px;
+      width: 6px;
+      height: 30px;
+      background: linear-gradient(to top, #ff0000, #ffa500);
+      border-radius: 3px;
+      box-shadow: 0 0 8px red;
+      animation: missileLaunch 10s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes missileLaunch {
+      0% {
+        transform: translateY(0) rotate(450deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-130vh) rotate(235deg);
+        opacity: 0;
+      }
+    }
+
+    /* Twinkling Stars */
+    .star {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 4s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    /* Music Player (optional) */
+    audio {
+      display: none;
+      src: local("./Ed Sheeran - Perfect (video-converter.com).mp3");
+      
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Music -->
+  <audio autoplay loop>
+    <source src="./Ed Sheeran - Perfect (video-converter.com).mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating Balloons -->
+  <script>
+    for (let i = 0; i < 5; i++) {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon';
+      balloon.style.left = Math.random() * 80 + 15 + '%';
+      balloon.style.animationDelay = (i * 2) + 's';
+      balloon.innerHTML = `
+        <div class="text">I LOVE YOU</div>
+        <div class="string"></div>
+      `;
+      document.body.appendChild(balloon);
+    }
+
+    // Launch Missiles
+    for (let i = 0; i < 40; i++) {
+      const missile = document.createElement('div');
+      missile.className = 'missile';
+      missile.style.left = Math.random() * window.innerWidth + 'px';
+      missile.style.animationDelay = Math.random() * 6 + 's';
+      document.body.appendChild(missile);
+    }
+
+    // Add Stars
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.animationDelay = Math.random() * 2 + 's';
+      document.body.appendChild(star);
+    }
+  </script>
+
+</body>
+</html>
